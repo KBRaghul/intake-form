@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     ]
     database_url: str = "postgresql+psycopg://intake:intake@localhost:5433/intake"
 
+
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
