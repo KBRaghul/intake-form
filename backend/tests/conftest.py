@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 TEST_DATABASE_URL = os.getenv(
     "TEST_DATABASE_URL",
@@ -15,6 +16,8 @@ from sqlalchemy.orm import Session  # noqa: E402
 from alembic import command  # noqa: E402
 from app.db.session import engine, get_db  # noqa: E402
 from app.main import app  # noqa: E402
+
+BACKEND_DIR = Path(__file__).resolve().parents[1]
 
 
 @pytest.fixture(scope="session", autouse=True)
