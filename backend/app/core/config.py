@@ -11,10 +11,10 @@ class Settings(BaseSettings):
     debug: bool = False
     api_prefix: str = "/api"
     cors_origins: list[str] = [
-        "http://localhost:5173",  # client app
-        "http://localhost:5174",  # admin app
+        "http://localhost:5173",
+        "http://localhost:5174",
     ]
-
+    database_url: str = "postgresql+psycopg://intake:intake@localhost:5433/intake"
 
 @lru_cache
 def get_settings() -> Settings:
