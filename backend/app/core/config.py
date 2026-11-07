@@ -15,8 +15,11 @@ class Settings(BaseSettings):
         "http://localhost:5174",
     ]
     database_url: str = "postgresql+psycopg://intake:intake@localhost:5433/intake"
+    jwt_secret_key: str
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 15
 
 
 @lru_cache
 def get_settings() -> Settings:
-    return Settings()
+    return Settings()  # type: ignore[call-arg]  # values come from env / .env
