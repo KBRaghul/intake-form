@@ -7,6 +7,7 @@ TEST_DATABASE_URL = os.getenv(
 )
 # Must be set before the app is imported, so settings and the engine use the test DB
 os.environ["DATABASE_URL"] = TEST_DATABASE_URL
+os.environ.setdefault("JWT_SECRET_KEY", "test-secret-key-that-is-long-enough-for-hs256-signing")
 
 import pytest  # noqa: E402
 from alembic.config import Config  # noqa: E402
