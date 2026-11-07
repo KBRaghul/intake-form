@@ -37,3 +37,24 @@ def generate_refresh_token() -> str:
 
 def hash_refresh_token(token: str) -> str:
     return hashlib.sha256(token.encode()).hexdigest()
+
+
+class TokenError(Exception):
+    """Raised when an access token is missing, invalid, expired or the wrong type."""
+
+
+def decode_access_token(token: str) -> dict:
+    settings = get_settings()
+    try:
+        claims = jwt.decode(
+            token,
+            settings.jwt_secret_key,
+            algorithms=[settings.jwt_algorithm],
+            options={"require": ["exp", "sub", "type"]},
+        )
+    except jwt.PyJWTError as exc:
+        raise TokenError("Invalid token") from exc
+
+    if claims.get("type") != "access":
+        raise TokenError("Wrong token type")
+    return claims
