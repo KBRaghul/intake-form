@@ -4,10 +4,9 @@ from fastapi.middleware.cors import CORSMiddleware
 # app/main.py
 from app.api.router import api_router
 from app.api.routes import health
-from app.core.config import get_settings
 
 # app/api/routes/health.py
-from app.core.config import Settings, get_settings
+from app.core.config import get_settings
 
 
 def create_app() -> FastAPI:
